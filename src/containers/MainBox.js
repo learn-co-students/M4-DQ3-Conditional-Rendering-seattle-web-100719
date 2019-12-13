@@ -4,6 +4,40 @@ import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
 
+  constructor(){
+    super();
+    this.state = {
+      detailsToDisplay: <Profile />
+    }
+  }
+
+  handleClick = (event) => {
+      // console.log(event.target);
+      switch(event.target.id){
+        case 'profile':
+          this.setState({
+            detailsToDisplay: <Profile />
+          });
+          break;
+        case 'photo':
+          this.setState({
+            detailsToDisplay: <Photos />
+          });
+          break;
+        case 'cocktail':
+          this.setState({
+            detailsToDisplay: <Cocktails />
+          });
+          break;
+        case 'pokemon':
+          this.setState({
+            detailsToDisplay: <Pokemon />
+          });
+          break;
+        default:
+          console.log("how did you get here?")
+      }
+  }
 
   render() {
 
@@ -13,12 +47,15 @@ class MainBox extends React.Component {
 
     */
 
-    const detailsToDisplay = <div>Hi, I'm a div!</div>
-
     return (
       <div>
-        <MenuBar />
-        {detailsToDisplay}
+        <MenuBar handleClick={this.handleClick} 
+        profileRef={this.profileRef}
+        photoRef={this.photoRef}
+        cocktailRef={this.cocktailRef}
+        pokemonRef={this.pokemonRef}
+        />
+        {this.state.detailsToDisplay}
       </div>
     )
   }
